@@ -19,6 +19,8 @@ async function run() {
 
   try {
     const categoriesCollection = client.db('smartShop').collection('categories');
+    const productsCollection = client.db('smartShop').collection('products');
+    const bookingsCollection = client.db('smartShop').collection('bookings');
 
     app.get('/categories', async (req, res) => {
       const query = {};
@@ -27,9 +29,14 @@ async function run() {
       res.send(categories);
     });
 
-    app.get('/products', async (req, res) => {
+    app.get('/products/:id', async (req, res) => {
+      const id = req.params.id;
+      const filter = { c_id: id };
+      const result = await productsCollection.find(filter).toArray();
+      res.send(result)
+    });
 
-    })
+
   }
 
   finally {
