@@ -21,6 +21,7 @@ async function run() {
     const categoriesCollection = client.db('smartShop').collection('categories');
     const productsCollection = client.db('smartShop').collection('products');
     const bookingsCollection = client.db('smartShop').collection('bookings');
+    const usersCollection = client.db('smartShop').collection('users');
 
     app.get('/categories', async (req, res) => {
       const query = {};
