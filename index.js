@@ -21,7 +21,7 @@ async function run() {
     const categoriesCollection = client.db('smartShop').collection('categories');
     const productsCollection = client.db('smartShop').collection('products');
     const bookingsCollection = client.db('smartShop').collection('bookings');
-    const usersCollection = client.db('smartShop').collection('users');
+    const addProductCollection = client.db('smartShop').collection('addProduct');
 
     app.get('/categories', async (req, res) => {
       const query = {};
@@ -51,9 +51,9 @@ async function run() {
       res.send(result);
     });
 
-    app.post('/users', async (req, res) => {
-      const user = req.body;
-      const result = await usersCollection.insertOne(user);
+    app.post('/addProduct', async (req, res) => {
+      const product = req.body;
+      const result = await addProductCollection.insertOne(product);
       res.send(result);
     })
   }
