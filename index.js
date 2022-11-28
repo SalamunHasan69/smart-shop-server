@@ -6,8 +6,8 @@ const port = process.env.PORT || 5000;
 
 const app = express();
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 
 
@@ -42,7 +42,7 @@ async function run() {
       const query = { email: email };
       const bookings = await bookingsCollection.find(query).toArray();
       res.send(bookings);
-    })
+    });
 
     app.post('/bookings', async (req, res) => {
       const booking = req.body
@@ -50,17 +50,23 @@ async function run() {
       const result = await bookingsCollection.insertOne(booking);
       res.send(result);
     });
+
+    app.post('/users', async (req, res) => {
+      const user = req.body;
+      const result = await usersCollection.insertOne(user);
+      res.send(result);
+    })
   }
 
   finally {
 
-  }
+  };
 
-}
+};
 run().catch(error => console.log(error));
 
 app.get('/', async (req, res) => {
-  res.send('smart shop server is running')
-})
+  res.send('smart shop server is running');
+});
 
-app.listen(port, () => console.log(`Smart shop running on ${port}`))
+app.listen(port, () => console.log(`Smart shop running on ${port}`));
